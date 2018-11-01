@@ -6,11 +6,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
 
+import util.Ref;
+
 public class InternetCodeParser {
 
 	private String parseURL() throws IOException {
 		URL url = new URL(
-				"https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=UULa29CxhRwOeGTa1pOGH1Qg+&key=AIzaSyCQL8YJgSPu3HlCmwzj0WslNEXYbFhG-AY");
+				"https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=UULa29CxhRwOeGTa1pOGH1Qg+&key=" + Ref.APIKEY);
 
 		InputStream input = url.openStream();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(input));
