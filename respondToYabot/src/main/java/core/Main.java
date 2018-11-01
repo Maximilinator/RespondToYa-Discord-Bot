@@ -73,8 +73,3 @@ public class Main {
 		return "v" + Ref.VERSION;
 	}
 }
-
-// YouTube API
-// https://www.googleapis.com/youtube/v3/activities?part=snippet,contentDetails&channelId=UCLa29CxhRwOeGTa1pOGH1Qg&key=AIzaSyCQL8YJgSPu3HlCmwzj0WslNEXYbFhG-AY
-// https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&allThreadsRelatedToChannelId=UCLa29CxhRwOeGTa1pOGH1Qg&key=AIzaSyCQL8YJgSPu3HlCmwzj0WslNEXYbFhG-AY
-// https://www.googleapis.com/youtube/v3/commentThreads?part=snippet&videoId=6M6K-GzCd-o&key=AIzaSyCQL8YJgSPu3HlCmwzj0WslNEXYbFhG-AY
