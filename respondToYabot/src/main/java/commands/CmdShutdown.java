@@ -1,11 +1,14 @@
 package commands;
 
+import core.CommandLog;
 import core.PermsChecker;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
 import util.Ref;
 
 public class CmdShutdown implements Command {
+
+	private String invoke = "shutdown";
 
 	@Override
 	public boolean called(String[] args, MessageReceivedEvent event) {
@@ -17,8 +20,11 @@ public class CmdShutdown implements Command {
 
 		MessageChannel objMsgCh = event.getChannel();
 
-		if (PermsChecker.parsePermsLevel(event) == 1) {
+		if (PermsChecker.hasPerms(invoke, event)) {
 			objMsgCh.sendMessage("Der Bot ist ab jetzt offline!").queue();
+
+			CommandLog.cmdLog(invoke, event);
+
 			System.exit(0);
 		} else
 			objMsgCh.sendMessage(":warning: You do not have permissions to use this command!").queue();

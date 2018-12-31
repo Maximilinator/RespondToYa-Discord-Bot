@@ -3,6 +3,7 @@ package commands;
 import net.dv8tion.jda.core.EmbedBuilder;
 import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Guild;
+import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
@@ -11,6 +12,9 @@ import java.awt.Color;
 import java.io.*;
 import java.util.HashMap;
 
+import core.CommandLog;
+import core.PermsChecker;
+
 /**
  * Created by zekro on 24.09.2017 / 15:13 supremeBot.commands dev.zekro.de -
  * github.zekro.de © zekro 2017
@@ -18,6 +22,7 @@ import java.util.HashMap;
 
 public class AutoChannel implements Command, Serializable {
 
+	private String invoke = "autochan";
 	private static HashMap<VoiceChannel, Guild> autochannels = new HashMap<>();
 
 	public static HashMap<VoiceChannel, Guild> getAutochannels() {
@@ -127,40 +132,48 @@ public class AutoChannel implements Command, Serializable {
 
 	@Override
 	public void action(String[] args, MessageReceivedEvent event) {
+		
+		MessageChannel objMsgCh = event.getChannel();
 
-		Guild g = event.getGuild();
-		TextChannel tc = event.getTextChannel();
+		if (PermsChecker.hasPerms(invoke, event)) {
 
-		if (args.length < 1) {
-			error(tc, help());
-			return;
-		}
+			Guild g = event.getGuild();
+			TextChannel tc = event.getTextChannel();
 
-		switch (args[0]) {
-
-		case "list":
-			listChans(g, tc);
-			break;
-
-		case "set":
-		case "add":
-			if (args.length < 2)
+			if (args.length < 1) {
 				error(tc, help());
-			else
-				setChan(args[1], g, tc);
-			break;
+				return;
+			}
 
-		case "unset":
-			if (args.length < 2)
+			switch (args[0]) {
+
+			case "list":
+				listChans(g, tc);
+				break;
+
+			case "set":
+			case "add":
+				if (args.length < 2)
+					error(tc, help());
+				else
+					setChan(args[1], g, tc);
+				break;
+
+			case "unset":
+				if (args.length < 2)
+					error(tc, help());
+				else
+					unsetChan(args[1], g, tc);
+				break;
+
+			default:
 				error(tc, help());
-			else
-				unsetChan(args[1], g, tc);
-			break;
+			}
+			
+			CommandLog.cmdLog(invoke, event);
 
-		default:
-			error(tc, help());
-		}
-
+		} else
+			objMsgCh.sendMessage(":warning: You do not have permissions to use this command!").queue();
 	}
 
 	@Override

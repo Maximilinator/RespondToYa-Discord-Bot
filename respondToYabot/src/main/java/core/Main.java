@@ -7,6 +7,7 @@ import javax.security.auth.login.LoginException;
 import commands.AutoChannel;
 import commands.CmdBoing;
 import commands.CmdCheck;
+import commands.CmdCommandList;
 import commands.CmdShutdown;
 import commands.CmdURL;
 import commands.Music;
@@ -19,7 +20,6 @@ import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.OnlineStatus;
 import net.dv8tion.jda.core.entities.Game;
 import util.Ref;
-import youTubeCore.InternetCodeParser;
 
 public class Main {
 
@@ -27,12 +27,11 @@ public class Main {
 
 		JDABuilder jdaBuilder = new JDABuilder(AccountType.BOT).setToken(Ref.TOKEN).setGame(Game.playing(getVersion()))
 				.setAutoReconnect(true).setStatus(OnlineStatus.ONLINE);
-
-		PermsChecker permsChecker = new PermsChecker();
 		
+		// Hinzufügen der Commands
 		addListeners(jdaBuilder);
 		addCommands();
-		addPerms(permsChecker);
+		addPerms();
 
 		try {
 			JDA jda = jdaBuilder.buildBlocking();
@@ -56,17 +55,24 @@ public class Main {
 		CommandHandler.commands.put("aboboxcamper", new CmdURL());
 		CommandHandler.commands.put("autochan", new AutoChannel());
 		CommandHandler.commands.put("music", new Music());
+		CommandHandler.commands.put("commands", new CmdCommandList());
 	}
 
-	private static void addPerms(PermsChecker permsChecker) {
+	private static void addPerms() {
 		// PERMS 1
-		permsChecker.perms1[0] = "shutdown";
+		PermsChecker.perms1.add("shutdown");
 
 		// PERMS 2
-		permsChecker.perms2[0] = "ping";
-
+		
 		// PERMS 3
-		permsChecker.perms3[0] = "boing";
+	
+		// PERMS 4
+		PermsChecker.perms4.add("autochan");
+		PermsChecker.perms4.add("music");
+		PermsChecker.perms4.add("boing");
+		PermsChecker.perms4.add("aboboxcamper");
+		PermsChecker.perms4.add("ping");
+		PermsChecker.perms4.add("commands");
 	}
 
 	private static String getVersion() {

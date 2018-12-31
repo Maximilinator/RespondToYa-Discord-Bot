@@ -1,5 +1,6 @@
 package core;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -10,31 +11,48 @@ import util.Ref;
 public class PermsChecker {
 
 	public static HashMap<String, String[]> permLevel = new HashMap<>();
-	public String[] perms1 = new String[20];
-	public String[] perms2 = new String[20];
-	public String[] perms3 = new String[20];
+	public static ArrayList<String> perms1 = new ArrayList<>();
+	public static ArrayList<String> perms2 = new ArrayList<>();
+	public static ArrayList<String> perms3 = new ArrayList<>();
+	public static ArrayList<String> perms4 = new ArrayList<>();
 
-	public boolean hasPerms(String invoke, MessageReceivedEvent event) {
+	public static boolean hasPerms(String invoke, MessageReceivedEvent event) {
 		switch (parsePermsLevel(event)) {
 		case 1:
-			if (perms1.length != 0) {
-				for (int i = 0; i <= perms1.length; i++) {
-					if (perms1[i].equals(invoke)) {
+			if (perms1.size() != 0) {
+				for (int i = 0; i < perms1.size(); i++) {
+					if (perms1.get(i).equals(invoke)) {
 						return true;
 					}
 				}
 			}
 		case 2:
-			for (int i = 0; i <= perms2.length; i++) {
-
+			if (perms2.size() != 0) {
+				for (int i = 0; i < perms2.size(); i++) {
+					if (perms2.get(i).equals(invoke)) {
+						return true;
+					}
+				}
 			}
 		case 3:
-			for (int i = 0; i <= perms3.length; i++) {
-
+			if (perms3.size() != 0) {
+				for (int i = 0; i < perms3.size(); i++) {
+					if (perms3.get(i).equals(invoke)) {
+						return true;
+					}
+				}
+			}
+		case 4:
+			if (perms4.size() != 0) {
+				for (int i = 0; i < perms4.size(); i++) {
+					if (perms4.get(i).equals(invoke)) {
+						return true;
+					}
+				}
 			}
 		default:
 		}
-		return true;
+		return false;
 	}
 
 	public static int parsePermsLevel(MessageReceivedEvent event) {

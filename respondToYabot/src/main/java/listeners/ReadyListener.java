@@ -9,7 +9,7 @@ public class ReadyListener extends ListenerAdapter {
 	public void onReady(ReadyEvent event) {
 		
 		for (Guild guild : event.getJDA().getGuilds()) {
-			guild.getCategoriesByName("Development", true).get(0).getTextChannels().get(0).sendMessage("We did it guys, I'm back!").queue();
+			guild.getCategoriesByName("Development", true).get(0).getTextChannels().get(0).sendMessage("So guys, we did it! Yaiks!").queue();
 		}
 		
 	}
