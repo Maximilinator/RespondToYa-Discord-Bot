@@ -37,8 +37,11 @@ public class CmdCommandList implements Command {
 		default:
 		}
 
-		event.getTextChannel().sendMessage(EmbedTypes.help().setDescription(event.getAuthor().getAsMention() + " Du darfst folgende Commands benutzen:\n" + commandList).build()
-				).complete();
+		event.getTextChannel()
+				.sendMessage(EmbedTypes.help().setDescription(
+						event.getAuthor().getAsMention() + " Du darfst folgende Commands benutzen:\n" + commandList)
+						.build())
+				.complete();
 
 	}
 

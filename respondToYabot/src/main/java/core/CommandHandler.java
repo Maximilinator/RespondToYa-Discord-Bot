@@ -27,9 +27,16 @@ public class CommandHandler {
 					commands.get(cmd.invoke).executed(safe, cmd.event);
 				}
 			} else
-				event.getChannel().sendMessage(EmbedTypes.warning().setTitle("PERMISSIONS").setDescription(":warning: Du hast keine Berechtigung, diesen Command zu benutzen").build()).complete();
+				event.getChannel().sendMessage(EmbedTypes.warning().setTitle("PERMISSIONS")
+						.setDescription(":warning: Du hast keine Berechtigung, diesen Command zu benutzen").build())
+						.complete();
 		} else
-			event.getChannel().sendMessage(EmbedTypes.error().setTitle("ERROR").setDescription(":interrobang: Oopsie Doopsie! Diesen Command gibt es leider nicht... :scream:").build()).complete();
+			event.getChannel()
+					.sendMessage(EmbedTypes.error().setTitle("ERROR")
+							.setDescription(
+									":interrobang: Oopsie Doopsie! Diesen Command gibt es leider nicht... :scream:")
+							.build())
+					.complete();
 	}
 
 }

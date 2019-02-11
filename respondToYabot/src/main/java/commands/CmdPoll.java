@@ -34,12 +34,14 @@ public class CmdPoll implements Command {
 		for (int i = 0; i < args.length - 1; i++) {
 			question += " " + args[i];
 		}
-		MessageChannel channel = event.getGuild().getTextChannelById(event.getMessage().getMentionedChannels().get(0).getId());
+		MessageChannel channel = event.getGuild()
+				.getTextChannelById(event.getMessage().getMentionedChannels().get(0).getId());
 		channel.sendMessage(EmbedTypes.poll().setDescription(question).addField("  Ja", ":thumbsup:", true)
-				.addField("Nein", ":thumbsdown:", true).setAuthor(event.getAuthor().getName(), null, event.getAuthor().getAvatarUrl()).build()).complete().addReaction("👍").complete();
+				.addField("Nein", ":thumbsdown:", true)
+				.setAuthor(event.getAuthor().getName(), null, event.getAuthor().getAvatarUrl()).build()).complete()
+				.addReaction("👍").complete();
 
-		MessageHistory history = channel.getHistoryAfter(event.getChannel().getLatestMessageId(), 1)
-				.complete();
+		MessageHistory history = channel.getHistoryAfter(event.getChannel().getLatestMessageId(), 1).complete();
 		history.getRetrievedHistory().get(0).addReaction("👎").complete();
 		channel.sendMessage("@here").queue();
 	}

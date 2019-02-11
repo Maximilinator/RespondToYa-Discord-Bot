@@ -33,11 +33,11 @@ public class EmbedTypes {
 	public static EmbedBuilder kick() {
 		return new EmbedBuilder().setColor(Color.WHITE).setTitle("**KICK**");
 	}
-	
+
 	public static EmbedBuilder poll() {
 		return new EmbedBuilder().setColor(Color.MAGENTA).setTitle("**POLL/UMFRAGE**");
 	}
-	
+
 	public static EmbedBuilder log() {
 		return new EmbedBuilder().setColor(Color.LIGHT_GRAY);
 	}

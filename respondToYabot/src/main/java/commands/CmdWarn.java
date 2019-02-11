@@ -21,26 +21,20 @@ public class CmdWarn implements Command {
 			for (int i = 1; i < args.length; i++) {
 				reason += args[i] + " ";
 			}
-//			if (PermsChecker.canKick(event)) {
-				event.getChannel().sendMessage(EmbedTypes.warn()
-						.setDescription("Der Benutzer **" + event.getMessage().getMentionedUsers().get(0).getName()
-								+ "** wurde von **" + event.getMessage().getAuthor().getName() + "** verwarnt!")
-						.addField("Grund:", reason, true)
-						.setImage("https://media.giphy.com/media/tyk39lYCnSMIo/giphy.gif").build()).complete();
-
-				event.getMessage().getMentionedUsers().get(0).openPrivateChannel().complete().sendMessage(EmbedTypes
-						.warn()
-						.setDescription("Du wurdest von **" + event.getMessage().getAuthor().getName() + "** verwarnt!")
-						.addField("Grund:", reason, true)
-						.setImage("https://media.giphy.com/media/IT6kBZ1k5oEeI/giphy.gif").build()).complete();
-//			} else {
-//				event.getChannel().sendMessage(UniError.errorBotPermissions()
-//						.build()).complete();
-//			}
-		} else {
 			event.getChannel()
-					.sendMessage(UniError.errorInput().build())
+					.sendMessage(EmbedTypes.warn()
+							.setDescription("Der Benutzer **" + event.getMessage().getMentionedUsers().get(0).getName()
+									+ "** wurde von **" + event.getMessage().getAuthor().getName() + "** verwarnt!")
+							.addField("Grund:", reason, true)
+							.setImage("https://media.giphy.com/media/tyk39lYCnSMIo/giphy.gif").build())
 					.complete();
+
+			event.getMessage().getMentionedUsers().get(0).openPrivateChannel().complete().sendMessage(EmbedTypes.warn()
+					.setDescription("Du wurdest von **" + event.getMessage().getAuthor().getName() + "** verwarnt!")
+					.addField("Grund:", reason, true).setImage("https://media.giphy.com/media/IT6kBZ1k5oEeI/giphy.gif")
+					.build()).complete();
+		} else {
+			event.getChannel().sendMessage(UniError.errorInput().build()).complete();
 		}
 	}
 

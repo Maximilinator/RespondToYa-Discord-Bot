@@ -9,8 +9,8 @@ public class CommandLog {
 	public static void cmdLog(String cmd, MessageReceivedEvent event) {
 
 		event.getGuild().getCategoriesByName("Development", true).get(0).getTextChannels().get(2)
-				.sendMessage(EmbedTypes.log().setDescription("**" + event.getAuthor().getName() + "**: " + "'" + Ref.PREFIX + cmd
-						+ "'" + " --> **#" + event.getChannel().getName()+ "**").build())
+				.sendMessage(EmbedTypes.log().setDescription("**" + event.getAuthor().getName() + "**: " + "'"
+						+ Ref.PREFIX + cmd + "'" + " --> **#" + event.getChannel().getName() + "**").build())
 				.complete();
 	}
 
