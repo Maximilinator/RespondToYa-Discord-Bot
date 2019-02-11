@@ -41,6 +41,11 @@
       <artifactId>twitch4j</artifactId>
       <version>v0.11.0</version>
 	</dependency>
+	<dependency>
+    <groupId>org.json</groupId>
+    <artifactId>json</artifactId>
+    <version>20180130</version>
+</dependency>
   </dependencies>
   
   <repositories>

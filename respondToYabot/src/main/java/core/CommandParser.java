@@ -36,7 +36,7 @@ public class CommandParser {
 			this.raw = raw;
 			this.beheaded = beheaded;
 			this.splitBeheaded = splitBeheaded;
-			this.invoke = invoke;
+			this.invoke = invoke.toUpperCase();
 			this.args = args;
 			this.event = event;
 		}

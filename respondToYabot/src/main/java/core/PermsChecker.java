@@ -21,7 +21,7 @@ public class PermsChecker {
 		case 1:
 			if (perms1.size() != 0) {
 				for (int i = 0; i < perms1.size(); i++) {
-					if (perms1.get(i).equals(invoke)) {
+					if (perms1.get(i).equalsIgnoreCase(invoke)) {
 						return true;
 					}
 				}
@@ -29,7 +29,7 @@ public class PermsChecker {
 		case 2:
 			if (perms2.size() != 0) {
 				for (int i = 0; i < perms2.size(); i++) {
-					if (perms2.get(i).equals(invoke)) {
+					if (perms2.get(i).equalsIgnoreCase(invoke)) {
 						return true;
 					}
 				}
@@ -37,7 +37,7 @@ public class PermsChecker {
 		case 3:
 			if (perms3.size() != 0) {
 				for (int i = 0; i < perms3.size(); i++) {
-					if (perms3.get(i).equals(invoke)) {
+					if (perms3.get(i).equalsIgnoreCase(invoke)) {
 						return true;
 					}
 				}
@@ -45,7 +45,7 @@ public class PermsChecker {
 		case 4:
 			if (perms4.size() != 0) {
 				for (int i = 0; i < perms4.size(); i++) {
-					if (perms4.get(i).equals(invoke)) {
+					if (perms4.get(i).equalsIgnoreCase(invoke)) {
 						return true;
 					}
 				}
@@ -69,5 +69,15 @@ public class PermsChecker {
 			}
 		}
 		return 0;
+	}
+
+	public static boolean canKick(MessageReceivedEvent event) {
+		for (net.dv8tion.jda.core.entities.Role r : event.getGuild()
+				.getMember(event.getMessage().getMentionedUsers().get(0)).getRoles()) {
+			if (Arrays.stream(Ref.ROLESAHEADOFBOT).parallel().anyMatch(r.getName()::contains)) {
+				return false;
+			}
+		}
+		return true;
 	}
 }

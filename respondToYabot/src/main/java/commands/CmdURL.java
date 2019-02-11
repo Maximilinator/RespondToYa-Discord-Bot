@@ -1,15 +1,13 @@
 package commands;
 
-import core.CommandLog;
-import core.PermsChecker;
 import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
-import youTubeCore.InternetCodeParser;
+import util.EmbedTypes;
+import util.Ref;
+import youTubeCore.URLAnalyzer;
 
 public class CmdURL implements Command {
 
-	private String invoke = "aboboxcamper";
-	
 	@Override
 	public boolean called(String[] args, MessageReceivedEvent event) {
 
@@ -20,25 +18,23 @@ public class CmdURL implements Command {
 	public void action(String[] args, MessageReceivedEvent event) {
 
 		MessageChannel objMsgCh = event.getChannel();
-		InternetCodeParser codeParser = new InternetCodeParser();
-		
-		if (PermsChecker.hasPerms(invoke, event)) {
-		objMsgCh.sendMessage("Das hier ist das neueste Video von Maximilinator! " + codeParser.getVideoURL()).queue();
-		
-		CommandLog.cmdLog(invoke, event);
-		} else
-			objMsgCh.sendMessage(":warning: You do not have permissions to use this command!");
+
+		if (args.length >= 2) {
+			URLAnalyzer.commandAnalysis(args, event);
+		} else {
+			objMsgCh.sendMessage(EmbedTypes.warning().setTitle("EINGABEFORMAT").setDescription(
+					":warning: Falsches Eingabeformat! Benutze " + Ref.PREFIX + "help [Command] für weitere Infos!")
+					.build()).complete();
+		}
 	}
 
 	@Override
 	public void executed(boolean success, MessageReceivedEvent event) {
-
 	}
 
 	@Override
 	public String help() {
-
-		return null;
+		return Ref.PREFIX + "ytinfo " + "[Kanalname/YouTubeURL] " + "[current/total/channel]";
 	}
 
 }

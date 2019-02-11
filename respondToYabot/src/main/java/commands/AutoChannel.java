@@ -7,6 +7,7 @@ import net.dv8tion.jda.core.entities.MessageChannel;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.dv8tion.jda.core.entities.VoiceChannel;
 import net.dv8tion.jda.core.events.message.MessageReceivedEvent;
+import util.EmbedTypes;
 
 import java.awt.Color;
 import java.io.*;
@@ -173,7 +174,7 @@ public class AutoChannel implements Command, Serializable {
 			CommandLog.cmdLog(invoke, event);
 
 		} else
-			objMsgCh.sendMessage(":warning: You do not have permissions to use this command!").queue();
+			objMsgCh.sendMessage(EmbedTypes.warning().setTitle("PERMISSIONS").setDescription(":warning: Du hast keine Berechtigungen, um diesen Command auszuführen!").build()).complete();
 	}
 
 	@Override
